@@ -1,0 +1,163 @@
+name: Step 0, Welcome
+
+on:
+  workflow_dispatch:
+  issues:
+    types: [opened, edited, labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  get_current_step:
+    name: Check current step number
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - id: get_step
+        run: |
+          echo "current_step=$(cat ./.github/steps/-step.txt)" >> $GITHUB_OUTPUT
+    outputs:
+      current_step: ${{ steps.get_step.outputs.current_step }}
+
+  on_journey_selection:
+    name: Handle journey selection
+    needs: get_current_step
+    if: >-
+      ${{ github.event_name == 'issues' && 
+          (contains(github.event.issue.title, 'User Journey') || 
+           contains(join(github.event.issue.labels.*.name, ' '), 'user-journey')) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine selected journey
+        id: determine_journey
+        run: |
+          TITLE="${{ github.event.issue.title }}"
+          if [[ "$TITLE" == *"GenAI prototype"* ]]; then
+            echo "journey=1" >> $GITHUB_OUTPUT
+            echo "to_step=1" >> $GITHUB_OUTPUT
+          elif [[ "$TITLE" == *"move to Azure"* ]]; then
+            echo "journey=2" >> $GITHUB_OUTPUT
+            echo "to_step=2" >> $GITHUB_OUTPUT
+          elif [[ "$TITLE" == *"simple chat interface"* ]]; then
+            echo "journey=3" >> $GITHUB_OUTPUT
+            echo "to_step=3" >> $GITHUB_OUTPUT
+          elif [[ "$TITLE" == *"first AI app with RAG"* ]]; then
+            echo "journey=4" >> $GITHUB_OUTPUT
+            echo "to_step=4" >> $GITHUB_OUTPUT
+          elif [[ "$TITLE" == *"add search"* ]]; then
+            echo "journey=5" >> $GITHUB_OUTPUT
+            echo "to_step=5" >> $GITHUB_OUTPUT
+          elif [[ "$TITLE" == *"structured data"* ]]; then
+            echo "journey=6" >> $GITHUB_OUTPUT
+            echo "to_step=6" >> $GITHUB_OUTPUT
+          elif [[ "$TITLE" == *"frameworks"* ]]; then
+            echo "journey=7" >> $GITHUB_OUTPUT
+            echo "to_step=7" >> $GITHUB_OUTPUT
+          elif [[ "$TITLE" == *"template"* ]]; then
+            echo "journey=8" >> $GITHUB_OUTPUT
+            echo "to_step=8" >> $GITHUB_OUTPUT
+          elif [[ "$TITLE" == *"build an agent"* ]]; then
+            echo "journey=9" >> $GITHUB_OUTPUT
+            echo "to_step=9" >> $GITHUB_OUTPUT
+          elif [[ "$TITLE" == *"search the internet"* ]]; then
+            echo "journey=10" >> $GITHUB_OUTPUT
+            echo "to_step=10" >> $GITHUB_OUTPUT
+          else
+            echo "journey=0" >> $GITHUB_OUTPUT
+            echo "to_step=1" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Update step based on journey selection
+        if: steps.determine_journey.outputs.journey != '0'
+        uses: skills/action-update-step@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          from_step: 0
+          to_step: ${{ steps.determine_journey.outputs.to_step }}
+          
+      - name: Rewrite badge links in README.md to absolute URLs
+        run: |
+          OWNER_REPO="${GITHUB_REPOSITORY}"
+          # Use pipe as delimiter and target the specific pattern ](/issues/new?
+          # This replaces relative issue links like ](/issues/new?...) with absolute ones
+          sed -i 's|](/issues/new?|](https://github.com/'"${OWNER_REPO}"'/issues/new?|g' README.md
+          
+          
+      - name: Comment on issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const journey = process.env['DETERMINE_JOURNEY_OUTPUTS_JOURNEY'] || '${{ steps.determine_journey.outputs.journey }}';
+            let message = '';
+            const readmeUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/README.md`;
+            if (journey === '0') {
+              message = "I couldn't determine which journey you selected. Please try again with one of the user journeys listed in the README.";
+            } else {
+              message = `Thanks for selecting this user journey! The repository has been updated to guide you through this path. You can close this issue and continue with the instructions in the [README](${readmeUrl}).`;
+            }
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+            if (journey !== '0') {
+              github.rest.issues.update({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'closed'
+              });
+            }
+
+  on_reset_journey:
+    name: Handle reset journey
+    needs: get_current_step
+    if: >-
+      ${{ github.event_name == 'issues' &&
+          contains(join(github.event.issue.labels.*.name, ' '), 'reset-journey') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Reset to step 0
+        uses: skills/action-update-step@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          from_step: ${{ needs.get_current_step.outputs.current_step }}
+          to_step: 0
+
+      - name: Rewrite badge links in README.md to absolute URLs
+        run: |
+          OWNER_REPO="${GITHUB_REPOSITORY}"
+          # Use pipe as delimiter and target the specific pattern ](/issues/new?
+          # This replaces relative issue links like ](/issues/new?...) with absolute ones
+          sed -i 's|](/issues/new?|](https://github.com/'"${OWNER_REPO}"'/issues/new?|g' README.md
+          
+      - name: Comment and close issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "Your journey has been reset! You can now select a new user journey from the README."
+            });
+            github.rest.issues.update({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed'
+            });

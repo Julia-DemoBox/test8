@@ -1,0 +1,46 @@
+name: Reset Progress
+
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  reset_journey:
+    if: >-
+      ${{
+        github.event_name == 'issues' &&
+        contains(join(github.event.issue.labels.*.name, ' '), 'reset-journey')
+      }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Reset to step 0
+        uses: skills/action-update-step@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          from_step: '*'
+          to_step: 0
+
+      - name: Comment and close issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "Your progress has been reset! You can now select a new user journey from the [Welcome step](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/README.md)."
+            });
+            github.rest.issues.update({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed'
+            });

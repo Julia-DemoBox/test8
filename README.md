@@ -1,38 +1,54 @@
-<header>
+<!-- readme -->
 
-# AI Foundry: A JavaScript Edition
+# Welcome to the JS AI Build-a-thon!
 
-A practical journey demonstrating how JS/ TS developers can seamlessly integrate AI capabilities into web applications and services using AI Foundry.
+> **Note**
+> We recommend opening another browser tab to work through the following activities so you can keep these instructions open for reference.
 
-</header>
+The goal of this build-a-thon is to help you learn how to build AI applications using JavaScript and TypeScript. This is a hands-on experience where you'll work through a series of user journeys, each designed to guide you through the process of building AI applications step by step.
 
-- **Who this is for:** Developers, AI Engineers, Software development managers, Testers.
-- **What you'll learn:** This sets of journeys are designed to get you from _I haven't worked with AI_, to _building local AI prototypes_ and eventually to _creating a production-ready AI application_.
-- **What you'll build:** Local AI prototypes, deploy models on Azure, add AI models to web applications and extend them with Azure services for RAG, search, and orchestration.
+You'll complete a series of exercises that will:-
+- Help you understand the fundamentals of AI and how it can be applied in JavaScript and TypeScript.
+- Provide you with practical experience in building AI applications, experimenting with different AI techniques.
+- Introduce you to various tools, libraries, and frameworks that are commonly used in AI development.
+- Foster a community of learners and developers who are passionate about AI and its applications in JavaScript and TypeScript.
+- Help you build a portfolio of AI projects that showcase your skills and knowledge.
 
-### How to get started
+## How it works
 
-1. Right-click **Start course** and open the link in a new tab.
-2. In the new tab, most of the prompts will automatically fill in for you.
-   - For owner, choose your personal account or an organization to host the repository.
-   - **We recommend creating a public repository**, as private repositories will [use Actions minutes](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
-   - Give your repository a name, such as `JS-AI-Build-a-thon`
-   - Scroll down and click the **Create repository** button at the bottom of the form.
-3. After your new repository is created, **wait about 20 seconds, then refresh the page**. [GitHub Actions](https://docs.github.com/actions) will automatically update to the next step. Follow the step-by-step instructions in the new repository's README.
-4. Open a new browser tab, and work on the steps in your second tab while you read the instructions in this tab.
+The build-a-thon is structured around **user journeys**, each representing a different path you can take based on your current knowledge and goals. Check out the user journeys below to see which one aligns with your interests and experience level, and click on the corresponding badge to get started.
 
-   [![start-course](https://user-images.githubusercontent.com/1221423/235727646-4a590299-ffe5-480d-8cd5-8194ea184546.svg)](https://github.com/new?template_name=JS-Journey-to-AI-Foundry&template_owner=juliamuiruri4)
+Each user journey has a **specified expected activity**, (example, pushing a commit) that you need to complete before moving on to the next user journey. Once you complete the activity, **GitHub Actions will automatically trigger the next step in your journey**. This ensures that you progress through the build-a-thon in a structured manner, building on your knowledge and skills as you go.
 
-<footer>
+> **Note**
+> If you are a complete beginner, **we recommend starting from the first user journey and progressing sequentially**. This will help you build a solid foundation in AI concepts and techniques and progress to more advanced topics.
+> 
+> If you would like to reset your progress, you can do so by clicking the **Reset** button in the top right corner of each page. This will reset your progress and allow you to start over from the beginning.
 
----
 
-### Get help 
+## ✅ Activity: Select a user journey
 
-To connect with other developers ...
+To start, select a user journey below, then click **Submit new issue** on the page that opens. **Wait about 20 seconds, then refresh your repository page to see your next instructions.**
 
-[![Join Azure AI Community Discord](https://dcbadge.limes.pink/api/server/kzRShWzttr)](https://discord.gg/kzRShWzttr)
+[![Static Badge](https://img.shields.io/badge/User_Journey-I_want_to_build_a_local_GenAI_prototype-green)](https://github.com/Julia-DemoBox/test8/issues/new?title=User+Journey:+I+want+to+build+a+local+GenAI+prototype&labels=user-journey&body=🚀+I%27m+ready+to+build+my+first+local+GenAI+prototype%21+Let%27s+get+started+with+AI+in+JavaScript%21%0A%0A**Please+click+on+Create+below,+then+wait+about+15+seconds.+This+issue+will+automatically+close+and+the+README+will+update+with+your+next+instructions.**)
 
-&copy; 2025 JavaScript at Microsoft &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+[![Static Badge](https://img.shields.io/badge/User_Journey-I_have_a_prototype._Let's_move_to_Azure-orange)](https://github.com/Julia-DemoBox/test8/issues/new?title=User+Journey:+I+have+a+prototype.+Let's+move+to+Azure&labels=user-journey&body=☁️+Time+to+take+my+AI+prototype+to+the+cloud%21+Excited+to+deploy+on+Azure+and+scale+up%21%0A%0A**Please+click+on+Create+below,+then+wait+about+15+seconds.+This+issue+will+automatically+close+and+the+README+will+update+with+your+next+instructions.**)
 
-</footer>
+[![Static Badge](https://img.shields.io/badge/User_Journey-Add_a_simple_chat_interface-blue)](https://github.com/Julia-DemoBox/test8/issues/new?title=User+Journey:+I+want+to+add+a+simple+chat+interface&labels=user-journey&body=%F0%9F%92%AC+Let%27s+add+a+chat+interface+and+make+my+AI+app+interactive%21+Ready+for+some+real-time+conversations%21%0A%0A**Please+click+on+Create+below,+then+wait+about+15+seconds.+This+issue+will+automatically+close+and+the+README+will+update+with+your+next+instructions.**)
+
+[![Static Badge](https://img.shields.io/badge/User_Journey-I_want_to_create_my_first_AI_app_with_RAG-purple)](https://github.com/Julia-DemoBox/test8/issues/new?title=User+Journey:+I+want+to+create+my+first+AI+app+with+RAG&labels=user-journey&body=%F0%9F%93%9A+I%27m+diving+into+RAG+and+building+my+first+retrieval-augmented+AI+app%21+Let%27s+do+this%21%0A%0A**Please+click+on+Create+below,+then+wait+about+15+seconds.+This+issue+will+automatically+close+and+the+README+will+update+with+your+next+instructions.**)
+
+[![Static Badge](https://img.shields.io/badge/User_Journey-I_want_to_orchestrate_AI_integrations_using_frameworks-gold)](https://github.com/Julia-DemoBox/test8/issues/new?title=User+Journey:+I+want+to+orchestrate+AI+integrations+using+frameworks&labels=user-journey&body=%F0%9F%9B%A0%EF%B8%8F+Ready+to+orchestrate+AI+integrations+with+powerful+frameworks%21+Let%27s+build+something+amazing%21%0A%0A**Please+click+on+Create+below,+then+wait+about+15+seconds.+This+issue+will+automatically+close+and+the+README+will+update+with+your+next+instructions.**)
+
+[![Static Badge](https://img.shields.io/badge/User_Journey-I_want_to_build_an_agent-violet)](https://github.com/Julia-DemoBox/test8/issues/new?title=User+Journey:+I+want+to+build+an+agent&labels=user-journey&body=%F0%9F%A4%96+Let%27s+build+an+AI+agent+that+can+help+and+interact+with+users%21+Excited+for+this+step%21%0A%0A**Please+click+on+Create+below,+then+wait+about+15+seconds.+This+issue+will+automatically+close+and+the+README+will+update+with+your+next+instructions.**)
+
+
+<!-- [![Static Badge](https://img.shields.io/badge/User_Journey-I_want_to_add_search_to_my_AI_app-pink)](https://github.com/Julia-DemoBox/test8/issues/new?title=User+Journey:+I+want+to+add+search+to+my+AI+app&labels=user-journey&body=🔍+Search+capabilities%2C+here+I+come%21+Excited+to+make+my+AI+app+smarter+with+search%21)
+
+[![Static Badge](https://img.shields.io/badge/User_Journey-I_want_my_app_to_work_with_structured_data-yellow)](https://github.com/Julia-DemoBox/test8/issues/new?title=User+Journey:+I+want+my+app+to+work+with+structured+data&labels=user-journey&body=📊+Let%27s+connect+my+AI+app+to+structured+data+and+unlock+new+possibilities%21)
+
+[![Static Badge](https://img.shields.io/badge/User_Journey-I_just_want_a_production_ready_template_to_customize-silver)](https://github.com/Julia-DemoBox/test8/issues/new?title=User+Journey:+I+just+want+a+production+ready+template+to+customize&labels=user-journey&body=🎨+Give+me+a+production-ready+template+to+customize+and+launch+my+AI+project+fast%21)
+
+[![Static Badge](https://img.shields.io/badge/User_Journey-I_want_my_agent_to_search_the_internet-amber)](https://github.com/Julia-DemoBox/test8/issues/new?title=User+Journey:+I+want+my+agent+to+search+the+internet&labels=user-journey&body=🌐+I%27m+ready+to+give+my+agent+the+power+to+search+the+internet%21+Let%27s+explore+the+web+with+AI%21) -->
+
+
